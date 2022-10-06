@@ -4,10 +4,10 @@ function Movie({fetchedMovie}) {
   return (
     <div>
       <ul style={{listStyleType: "none"}}>
-        <li key={fetchedMovie.id}>
-          <img key={fetchedMovie.id} src={fetchedMovie.Poster} alt={fetchedMovie.Title} style={{margin: "auto", display: "block"}} />
+        <li>
+          <img src={fetchedMovie.Poster} alt={fetchedMovie.Title} style={{margin: "auto", display: "block"}} />
           
-          <p key={fetchedMovie.id} style={{textAlign:"center", color: "blue"}}>{fetchedMovie.Title}</p>
+          <p style={{textAlign:"center", color: "blue"}}>{fetchedMovie.Title}</p>
           
           {/* Adding to favorites === PATCH operation */}
           <button style={{margin: "auto", display: "block"}}>Add to Favorites &hearts;</button>
