@@ -13,7 +13,11 @@ function MoviesList() {
 
   return (
     <div>
-      MoviesList
+      {
+        fetchedMovies.map(fetchedMovie => {
+          return <Movie key={fetchedMovie.id} fetchedMovie={fetchedMovie} />
+        })
+      }
     </div>
   )
 }

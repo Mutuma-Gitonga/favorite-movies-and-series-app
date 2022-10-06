@@ -1,6 +1,6 @@
 import React from "react";
 
-function Movie() {
+function Movie({fetchedMovie}) {
   return (
     <div>
       <h1>This is one movie</h1>
