@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
+import Movie from './Movie';
 
 function MoviesList() {
   // State variable to store fetched movies
@@ -11,8 +12,19 @@ function MoviesList() {
         .then(moviesDb => setFetchedMovies(moviesDb))
   },[]);
 
+  function handleClick() {
+    // Filtering favorite movies
+    const favoriteMovies = fetchedMovies.filter((fetchedMovie) => {
+      return fetchedMovie.favorite === true;
+    });
+
+    setFetchedMovies(favoriteMovies);
+    
+  }
+
   return (
     <div>
+      <button style={{margin: "auto", display: "block"}} onClick={handleClick}>View Favorites</button>
       {
         fetchedMovies.map(fetchedMovie => {
           return <Movie key={fetchedMovie.id} fetchedMovie={fetchedMovie} />
