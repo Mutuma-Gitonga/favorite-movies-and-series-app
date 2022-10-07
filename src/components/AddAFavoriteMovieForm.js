@@ -1,25 +1,34 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import { Redirect } from "react-router-dom";
 
-function AddAFavoriteMovieForm() {
+function AddAFavoriteMovieForm({onSubmit}) {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieYear, setMovieYear] = useState("");
   const [amongFavorites, setAmongFavorites] = useState(false);
   
-  useEffect(() => {
-    console.log("After",amongFavorites);
-  },[amongFavorites]);
+  const posterUrl = `https://dummyimage.com/182x268/000/fff&text=Movie+title`;
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(movieTitle, movieYear, amongFavorites)
+    const newMovieObj =  {
+      Title : movieTitle, 
+      Year: movieYear, 
+      favorite: amongFavorites, 
+      Poster: posterUrl
+    }
+    console.log("newMovieObj",newMovieObj);
+    onSubmit(newMovieObj);
+
+    setMovieTitle("");
+    setMovieYear("");
+    setAmongFavorites(false);
   }
-  
-  // Before implementing an external API, the poster image shall be set as static
 
   return (
     <div>
-      <form style={{margin:"auto", border: "2px solid red", display: "inline-block", padding:"10px"}} onSubmit={handleSubmit}> 
+      <form style={{margin:"auto", marginTop: "20px", display: "inline-block", border: "2px solid blue", padding:"10px"}} onSubmit={handleSubmit}> 
+      <h2>Add A New Movie</h2>
         <label>
           Enter Movie Title:
           <br/>
@@ -33,11 +42,11 @@ function AddAFavoriteMovieForm() {
         </label>
         <br/>
         <label> 
-        <input type="checkbox" id="favorite" name="favorite" value={amongFavorites} onChange={() => setAmongFavorites(!amongFavorites)}/>
-          Is it among your favorites?
+        <input type="checkbox" id="favorite" name="favorite" checked={amongFavorites} onChange={() => setAmongFavorites(!amongFavorites)}/>
+          Is it a favorite?
         </label><br></br>
 
-        <input type="submit" name="submit" value="Find Gifs"/>
+        <input type="submit" name="submit" value="Submit"/>
       </form>
     </div>
   )
