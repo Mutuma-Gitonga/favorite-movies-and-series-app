@@ -59,7 +59,7 @@
     {
       "Title": "The Martian",
       "Year": "2012",
-      "favorite": false,
+      "favorite": true,
       "Poster": "https://dummyimage.com/182x268/000/fff&text=Movie+title",
       "id": 9
     }

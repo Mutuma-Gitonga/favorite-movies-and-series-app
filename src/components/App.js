@@ -9,7 +9,7 @@ import AddAFavoriteMovieForm from "./AddAFavoriteMovieForm";
 function App() {
 
   function handleAddNewMovie(newMovieObj) {
-    fetch("http://localhost:3000/movies", {
+    fetch("https://favorite-movies-and-series-app.herokuapp.com/movies", {
       method: "POST",
       headers: {
           "Content-Type": "application/json"

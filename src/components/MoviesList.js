@@ -11,7 +11,7 @@ function MoviesList() {
 
   // Fetch movies list when user clicks on Movies
   useEffect(() => {
-    fetch('http://localhost:3000/movies')
+    fetch('https://favorite-movies-and-series-app.herokuapp.com/movies')
       .then(res => res.json())
         .then(moviesDb => setFetchedMovies(moviesDb))
 
@@ -35,7 +35,7 @@ function MoviesList() {
       setFetchedMovies(() => filteredMovies);
       setMovieRemovedFromFavorites(movieRemovedFromFavorites => movieRemovedFromFavorites = false)
     } else {
-      fetch('http://localhost:3000/movies')
+      fetch('https://favorite-movies-and-series-app.herokuapp.com/movies')
       .then(res => res.json())
         .then(moviesDb => setFetchedMovies(moviesDb))
       

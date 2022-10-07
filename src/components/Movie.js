@@ -16,7 +16,7 @@ function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState, onMovieDelet
     console.log("favoriteRef", favoriteRef.current)
 
     // Persist true favorite boolean status in the db.json file when "add to favorites button's clicked"
-    fetch(`http://localhost:3000/movies/${fetchedMovie.id}`, {
+    fetch(`https://favorite-movies-and-series-app.herokuapp.com/movies${fetchedMovie.id}`, {
       method: "PATCH",
       headers: {
           "Content-Type": "application/json"
@@ -32,7 +32,7 @@ function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState, onMovieDelet
   }
 
   function handleDeleteClick() {
-    fetch(`http://localhost:3000/movies/${fetchedMovie.id}`, {
+    fetch(`https://favorite-movies-and-series-app.herokuapp.com/movies${fetchedMovie.id}`, {
       method: "DELETE"
     });
 
