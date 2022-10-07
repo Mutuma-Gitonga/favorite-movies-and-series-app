@@ -1,20 +1,14 @@
-import React, {useState, useRef} from "react";
+import React, {useEffect, useRef} from "react";
 
 function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState}) {
-  // const [removeFavorite, setRemoveFavorite] = useState(false);
-  // const [favoriteState, setFavoriteState] = useState();
   const favoriteRef = useRef(true);
 
   console.log(favoriteButtonState)
   function handleClick() {
     console.log("favoriteButtonState in favorite",favoriteButtonState)
     if(favoriteButtonState) {
-      // setFavoriteState(false);
-      // console.log("favorite state under favorites",favoriteState);
       favoriteRef.current = false;
     } else {
-      // console.log("favorite state",favoriteState);
-      // setFavoriteState(true);
       favoriteRef.current = true;
     }
     console.log("favoriteRef", favoriteRef.current)

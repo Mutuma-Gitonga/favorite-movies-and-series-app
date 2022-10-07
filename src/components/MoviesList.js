@@ -6,6 +6,7 @@ function MoviesList() {
   const [fetchedMovies, setFetchedMovies] = useState([]);
   const [favoriteButtonState, setFavoriteButtonState] = useState(false);
   const [areFavoriteMoviesAvailable, setAreFavoriteMoviesAvailable] = useState(true);
+  const [movieRemovedFromFavorites, setMovieRemovedFromFavorites] = useState(false);
 
   // Fetch movies list when user clicks on Movies
   useEffect(() => {
@@ -32,12 +33,13 @@ function MoviesList() {
       filteredMovies.length !== 0 ? setAreFavoriteMoviesAvailable(areFavoriteMoviesAvailable => areFavoriteMoviesAvailable = true) : setAreFavoriteMoviesAvailable(areFavoriteMoviesAvailable => areFavoriteMoviesAvailable = false);
 
       setFetchedMovies(() => filteredMovies);
+      setMovieRemovedFromFavorites(movieRemovedFromFavorites => movieRemovedFromFavorites = false)
     } else {
       fetch('http://localhost:3000/movies')
       .then(res => res.json())
         .then(moviesDb => setFetchedMovies(moviesDb))
     }
-  },[favoriteButtonState]);
+  },[favoriteButtonState,movieRemovedFromFavorites]);
 
   // Callback function to update fetchedMovies frontend state following PATCH operation
   function handleMovieFavorite(patchedMovieId, favState) {
@@ -51,6 +53,9 @@ function MoviesList() {
       }
     });
     setFetchedMovies(() => updatedMoviesAfterPatch);
+
+    favState ? setMovieRemovedFromFavorites(movieRemovedFromFavorites => movieRemovedFromFavorites) : setMovieRemovedFromFavorites(movieRemovedFromFavorites => movieRemovedFromFavorites = true);
+    
   }
 
   return (
@@ -61,7 +66,7 @@ function MoviesList() {
           fetchedMovies.map(fetchedMovie => {
             return <Movie key={fetchedMovie.id} fetchedMovie={fetchedMovie} onMovieFavorite={handleMovieFavorite} favoriteButtonState={favoriteButtonState} />
           }) :
-            <p style={{textAlign: "center", color: "red", fontSize: "2em" }}>No favorite movies at the moment. Please click on "View all Movies" to add your favorite ones.</p>
+            <p style={{textAlign: "center", color: "red", fontSize: "2em" }}>No favorite movies at the moment. <br/> Please click on "View all Movies" to add your favorite ones.</p>
       }
     </div>
   )
