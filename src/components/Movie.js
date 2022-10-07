@@ -3,7 +3,6 @@ import React, {useEffect, useRef} from "react";
 function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState}) {
   const favoriteRef = useRef(true);
 
-  console.log(favoriteButtonState)
   function handleClick() {
     console.log("favoriteButtonState in favorite",favoriteButtonState)
     if(favoriteButtonState) {

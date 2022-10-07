@@ -18,7 +18,6 @@ function MoviesList() {
     // setFavoriteButtonState((favoriteButtonState) => favoriteButtonState = false);
   },[]);
 
-  console.log(fetchedMovies);
 
   function handleClick() {
     setFavoriteButtonState((favoriteButtonState) => !favoriteButtonState);

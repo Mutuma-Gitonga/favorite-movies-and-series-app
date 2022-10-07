@@ -55,6 +55,13 @@
       "Year": "1992",
       "Poster": "https://ia.media-imdb.com/images/M/MV5BOGZmYzVkMmItM2NiOS00MDI3LWI4ZWQtMTg0YWZkODRkMmViXkEyXkFqcGdeQXVyODY0NzcxNw@@._V1_UX182_CR0,0,182,268_AL_.jpg",
       "favorite": false
+    },
+    {
+      "Title": "The Martian",
+      "Year": "2012",
+      "favorite": false,
+      "Poster": "https://dummyimage.com/182x268/000/fff&text=Movie+title",
+      "id": 9
     }
   ]
 }
