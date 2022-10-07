@@ -1,6 +1,6 @@
 import React, {useState, useRef} from "react";
 
-function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState}) {
+function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState, onMovieDelete}) {
   const favoriteRef = useRef(true);
   const [imageLoadErr, setImageLoadErr] = useState(false);
   
@@ -31,7 +31,13 @@ function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState}) {
     // console.log("Removed movie ID",fetchedMovie.id);
   }
 
-  
+  function handleDeleteClick() {
+    fetch(`http://localhost:3000/movies/${fetchedMovie.id}`, {
+      method: "DELETE"
+    });
+
+    onMovieDelete(fetchedMovie.id);
+  }
  
   return (
     <div>
@@ -45,7 +51,8 @@ function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState}) {
           <button style={{margin: "auto", display: "block"}} onClick={handleFavoriteClick}>{favoriteButtonState ? "Remove from Favorites": "Add to Favorites"}</button>
           <br/>
 
-          
+          {/* Delete movie === DELETE operation */}
+          <button style={{margin: "auto", display: "block"}} onClick={handleDeleteClick}>Delete Movie</button>
           <hr/>
         </li>
       </ul> 
