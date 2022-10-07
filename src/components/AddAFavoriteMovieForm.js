@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { Redirect } from "react-router-dom";
 
 function AddAFavoriteMovieForm({onSubmit}) {
   const [movieTitle, setMovieTitle] = useState("");
@@ -17,7 +16,7 @@ function AddAFavoriteMovieForm({onSubmit}) {
       favorite: amongFavorites, 
       Poster: posterUrl
     }
-    console.log("newMovieObj",newMovieObj);
+    // console.log("newMovieObj",newMovieObj);
     onSubmit(newMovieObj);
 
     setMovieTitle("");
