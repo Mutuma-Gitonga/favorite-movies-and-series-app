@@ -38,6 +38,8 @@ function MoviesList() {
       fetch('http://localhost:3000/movies')
       .then(res => res.json())
         .then(moviesDb => setFetchedMovies(moviesDb))
+      
+      setMovieRemovedFromFavorites(movieRemovedFromFavorites => movieRemovedFromFavorites = false)
     }
   },[favoriteButtonState,movieRemovedFromFavorites]);
 
@@ -53,8 +55,17 @@ function MoviesList() {
     });
     setFetchedMovies(() => updatedMoviesAfterPatch);
 
+    // Update movieRemovedFromFavorites boolean state to true if movie has been deleted to re-render the movie cards
     favState ? setMovieRemovedFromFavorites(movieRemovedFromFavorites => movieRemovedFromFavorites) : setMovieRemovedFromFavorites(movieRemovedFromFavorites => movieRemovedFromFavorites = true);
     
+  }
+
+  function handleMovieDelete(deletedMovieId) {
+    const updatedMoviesAfterDelete = fetchedMovies.filter(movie => movie.id !== deletedMovieId);
+    setFetchedMovies(() => updatedMoviesAfterDelete);
+
+    // Update to true to trigger useEffect hook to re-render the new movie cards list
+    setMovieRemovedFromFavorites(movieRemovedFromFavorites => movieRemovedFromFavorites = true);
   }
 
   // function handleNewMovieClick() {
@@ -72,7 +83,7 @@ function MoviesList() {
 
         { areFavoriteMoviesAvailable || !favoriteButtonState ?
             fetchedMovies.map(fetchedMovie => {
-              return <Movie key={fetchedMovie.id} fetchedMovie={fetchedMovie} onMovieFavorite={handleMovieFavorite} favoriteButtonState={favoriteButtonState} />
+              return <Movie key={fetchedMovie.id} fetchedMovie={fetchedMovie} onMovieFavorite={handleMovieFavorite} favoriteButtonState={favoriteButtonState} onMovieDelete={handleMovieDelete} />
             }) :
               <p style={{textAlign: "center", color: "red", fontSize: "2em" }}>No favorite movies at the moment. <br/> Please click on "View all Movies" to add your favorite ones.</p>
         }
