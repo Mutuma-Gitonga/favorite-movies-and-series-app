@@ -7,6 +7,7 @@ function MoviesList() {
   const [favoriteButtonState, setFavoriteButtonState] = useState(false);
   const [areFavoriteMoviesAvailable, setAreFavoriteMoviesAvailable] = useState(true);
   const [movieRemovedFromFavorites, setMovieRemovedFromFavorites] = useState(false);
+  // const [newMovieButtonState, setNewMovieButtonState] = useState(false);
 
   // Fetch movies list when user clicks on Movies
   useEffect(() => {
@@ -43,7 +44,6 @@ function MoviesList() {
 
   // Callback function to update fetchedMovies frontend state following PATCH operation
   function handleMovieFavorite(patchedMovieId, favState) {
-    console.log(patchedMovieId,favState);
     
     const updatedMoviesAfterPatch = fetchedMovies.map((movie) => {
       if(movie.id === patchedMovieId){
@@ -58,16 +58,25 @@ function MoviesList() {
     
   }
 
+  // function handleNewMovieClick() {
+  //   setNewMovieButtonState(newMovieButtonState => !newMovieButtonState);
+  // }
+
+  // if(newMovieButtonState) return <Redirect to="/newMovie" />;
+
+  // <button style={{float: "left"}} onClick={handleNewMovieClick}>Add a New Movie</button>
+        
   return (
     <div>
-      <button id="favoriteListButton" style={{margin: "auto", display: "block"}} onClick={handleClick}>{favoriteButtonState? "View All Movies" : "View Favorite Movies"}</button>
-      
-      { areFavoriteMoviesAvailable || !favoriteButtonState ?
-          fetchedMovies.map(fetchedMovie => {
-            return <Movie key={fetchedMovie.id} fetchedMovie={fetchedMovie} onMovieFavorite={handleMovieFavorite} favoriteButtonState={favoriteButtonState} />
-          }) :
-            <p style={{textAlign: "center", color: "red", fontSize: "2em" }}>No favorite movies at the moment. <br/> Please click on "View all Movies" to add your favorite ones.</p>
-      }
+        
+        <button id="favoriteListButton" style={{margin: "auto", display: "block"}} onClick={handleClick}>{favoriteButtonState? "View All Movies" : "View Favorite Movies"}</button>
+
+        { areFavoriteMoviesAvailable || !favoriteButtonState ?
+            fetchedMovies.map(fetchedMovie => {
+              return <Movie key={fetchedMovie.id} fetchedMovie={fetchedMovie} onMovieFavorite={handleMovieFavorite} favoriteButtonState={favoriteButtonState} />
+            }) :
+              <p style={{textAlign: "center", color: "red", fontSize: "2em" }}>No favorite movies at the moment. <br/> Please click on "View all Movies" to add your favorite ones.</p>
+        }
     </div>
   )
 }
