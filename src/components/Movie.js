@@ -1,9 +1,12 @@
-import React, {useEffect, useRef} from "react";
+import React, {useState, useRef} from "react";
 
 function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState}) {
   const favoriteRef = useRef(true);
+  const [imageLoadErr, setImageLoadErr] = useState(false);
+  
+  const fallbackImage = `https://dummyimage.com/182x268/000/fff&text=Movie+title`;
 
-  function handleClick() {
+  function handleFavoriteClick() {
     console.log("favoriteButtonState in favorite",favoriteButtonState)
     if(favoriteButtonState) {
       favoriteRef.current = false;
@@ -27,17 +30,22 @@ function Movie({fetchedMovie, onMovieFavorite, favoriteButtonState}) {
 
     // console.log("Removed movie ID",fetchedMovie.id);
   }
+
+  
  
   return (
     <div>
       <ul style={{listStyleType: "none"}}>
         <li>
-          <img src={fetchedMovie.Poster} alt={fetchedMovie.Title} style={{margin: "auto", display: "block"}} />
+          <img src={imageLoadErr ? fallbackImage : fetchedMovie.Poster} alt={fetchedMovie.Title} style={{margin: "auto", display: "block"}} onError={() => setImageLoadErr(true)} />
           
           <p style={{textAlign:"center", color: "blue"}}>{fetchedMovie.Title}</p>
           
-          {/* Adding to favorites === PATCH operation */}
-          <button style={{margin: "auto", display: "block"}} onClick={handleClick}>{favoriteButtonState ? "Remove from Favorites": "Add to Favorites &hearts;"}</button>
+          {/* Adding to favorites/Removing from favorites === PATCH operation */}
+          <button style={{margin: "auto", display: "block"}} onClick={handleFavoriteClick}>{favoriteButtonState ? "Remove from Favorites": "Add to Favorites"}</button>
+          <br/>
+
+          
           <hr/>
         </li>
       </ul> 
